@@ -1,7 +1,5 @@
 canvas{
-  float: left;
-   
-    border: 1px solid gray;
+     border: 1px solid gray;
     background:#FFFFE0;
     width: 800px; 
     height: 800px;
@@ -9,6 +7,9 @@ canvas{
 }
 
 
+#canvasDiv{
+ float: left;
+}
 
 #controls{
 float: left;
