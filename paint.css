@@ -1,5 +1,5 @@
 canvas{
-   float: left;
+  float: left;
    
     border: 1px solid gray;
     background:#FFFFE0;
@@ -11,7 +11,7 @@ canvas{
 
 
 #controls{
-  float:left;
+float: left;
   margin-left: 10px;
   //  border: 2px solid khaki;
     background-color: rgba(0,0,0,0.1);
