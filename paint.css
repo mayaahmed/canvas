@@ -1,0 +1,86 @@
+canvas{
+   float: left;
+   
+    border: 1px solid gray;
+    background:#FFFFE0;
+    width: 800px; 
+    height: 800px;
+    box-shadow: inset 2px 2px 1px rgba(0,0,0,0.2);
+}
+
+
+
+#controls{
+  float:left;
+  margin-left: 10px;
+  //  border: 2px solid khaki;
+    background-color: rgba(0,0,0,0.1);
+    width: 15%;
+ //   box-shadow:  2px 2px 5px khaki;
+    text-align: center;
+  //  border-radius: 5px;
+}
+
+.listingButton{
+width: 100px;
+height: 30px;
+border: 1px solid gray;
+box-shadow: inset 2px 2px 1px rgba(0,0,0,0.2);
+text-shadow: 1px 1px 1px black;
+opacity:0.8;
+border-radius: 5px;
+font-size: 15px;
+background: khaki;
+margin-top: 3px;
+margin-bottom: 3px;
+}
+
+.listingButton:hover{
+opacity: 1;
+width:101px;
+height:31px;
+
+}
+
+.closeButtonOptions{
+float: right;
+// margin-left:50px;
+height: 20px;
+width: 20px;
+font-size: 18px;
+border: 1px solid black;
+background: wheat;
+// border-radius: 2px;
+// box-shadow: 2px 2px 12px rgba(0,0,0,0.2);
+// color: white;
+opacity: 0.5;
+line-height: 20px;
+}
+
+.closeButtonOptions:hover{
+opacity: 0.9;
+height: 22px;
+width: 22px;
+}
+
+
+
+.lightBorder {
+    border: 2px solid white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    visibility: hidden;
+    height: 0px;
+    min-width: 75px;
+    background: #FFFFE0;
+    opacity: 0.9;
+}
+
+p{
+    margin: 4px;
+}
+
+#clearCanvas {
+    margin-top: 5px;
+}
