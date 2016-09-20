@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--  Programmer : Maya Ahmed 
+      Files: index.html;
+      These file contains the codes for making a Drawing App.
+      Date: "Aug 31 2016" -->
+
+	<head>
+		<meta charset="utf-8" />
+		<title>Punjiri: Web and Mobile Technologies.</title>
+		<link rel="stylesheet" type="text/css" href="general.css">
+        <link href="paint.css" rel="stylesheet">
+       
+	</head>
+
+	<body>
+            <div id="topStuff">
+          <header id="top_header">
+				<p>Canvas</p>
+			</header>
+			<nav id="top_menu">
+				<ul>
+                  <li>
+                    <div id="myNav" class="overlay">
+                      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"> &times;</a>
+                      <div class="overlay-content">
+                       <p> &copy; Punjiri Web and Mobile Technologies, 2016. </p>
+                       <p> Email: maya.ahmed@gmail.com</p>
+                      </div>
+                    </div>
+                    <span style="font-size:30px; cursor:pointer" onclick="openNav()"> &equiv;</span>
+                  </li>
+                </ul>
+			</nav>
+            </div>
+
+	<div id="container"> 
+    <canvas id="canvas" width="500" height="800"> 
+      Sorry Cannot display Canvas. Update Browser.
+    </canvas>
+
+    <div id="controls">
+
+      <p><input id="clearCanvas" class="listingButton" type="button" value="New"></p>
+      <p><input type="button" class="listingButton"  value="color" onclick="slideOpen(colorDiv)" ></p>
+      <div class="lightBorder" id="colorDiv">
+        <input type="button" class="closeButtonOptions" id="colorButton" value="&times"
+               onclick="slideClose(colorDiv, 'colorButton')">
+        <p><label>Fill: <input id="fillBox" type="checkbox" checked="checked"></label></p>
+        <p><label>Fill Color: <input id="fillColor" type="color" value="#3333FF"></label>  
+        <p><label>Fill Canvas: <input id="backgroundColor" type="color" value="#FFFFFF"></label></p>
+        <p><label>Stroke Color: <input id="strokeColor" type="color"></label></p>
+    </div>
+
+     <p> <input type="button" class="listingButton"  value="Line Style" onclick="slideOpen(lineDiv)" ></p>
+      <div class="lightBorder" id="lineDiv"> 
+        <input type="button" class="closeButtonOptions" id="lineButton" value="&times"
+                 onclick="slideClose(lineDiv)"></p>
+        <p><label>Line Width: <input id="lineWidth" type="range" step="1" min="1" max="200" value="4"></label></p>
+       
+        <p><input type="radio" name="lineCap" value="round"  checked="checked">round</p>
+ <p><input type="radio" name="lineCap" value="butt">Butt</p>
+        <p><input type="radio" name="lineCap" value="square">square</p>
+      </div>
+
+     <p> <input type="button" class="listingButton"  value="Shape" onclick="slideOpen(shapeDiv)" ></p>
+      <div class="lightBorder" id="shapeDiv">
+        <input type="button" class="closeButtonOptions" id="shapeButton" value="&times"
+                 onclick="slideClose(shapeDiv)">
+        <p> <input type="radio" name="shape"  value="free" checked="checked" >Free Drawing</p>
+        <p><input type="radio" name="shape" value="line" >Line</p>
+        <p><input type="radio" name="shape" value="circle">Circle</p>
+        <p><input type="radio" name="shape" value="polygon">Polygon</p>
+        <p><label>Polygon Sides: <input id="polygonSides" type="range" step="1" min="3" max="10"></label></p>
+         <p><label>Polygon Angle: <input id="polygonAngle" type="range" step="22.5" min="0" max="90"></label></p>
+      </div>
+
+<p> <input type="button" class="listingButton"  value="Image" onclick="slideOpen(imageDiv)" ></p>
+<div class="lightBorder" id="imageDiv">
+  <input type="button" class="closeButtonOptions" id="shapeButton" value="&times"
+                 onclick="slideClose(imageDiv)">
+<p> <input type="file" id= "inputFileToLoad" > </p>
+<p> <input type="button" id="buttonLoadFile" value ="Load Selected File"; onclick="loadImageFileAsURL()"> </p>
+</div>
+     <p> <input type="button" class="listingButton"  value="Composition" onclick="slideOpen(compositionControl)" ></p>
+
+     <div id="compositionControl" class="lightBorder">
+       <input type="button" class="closeButtonOptions" id="compositionButton" value="&times"
+                 onclick="slideClose(compositionControl)"></p>
+      <p><input type="radio" name="composition" value="source&timesover" checked="checked">source-over</p>
+        <p><input type="radio" name="composition" value="source-atop">source-atop</p>
+        <p><input type="radio" name="composition" value="source-in">source-in</p>
+        <p><input type="radio" name="composition" value="source-out">source-out</p>
+       
+        <p><input type="radio" name="composition" value="destination-over">destination-over</p>
+        <p><input type="radio" name="composition" value="destination-atop">destination-atop</p>
+        <p><input type="radio" name="composition" value="destination-in">destination-in</p>
+        <p><input type="radio" name="composition" value="destination-out">destination-out</p>
+       
+        <p><input type="radio" name="composition" value="lighter">lighter</p>
+        <p><input type="radio" name="composition" value="copy">copy</p>
+        <p><input type="radio" name="composition" value="xor">xor</p>
+    </div>
+
+   
+
+
+
+      
+</div>
+
+
+
+
+
+</div>
+ <script src="paint.js"></script>
+<script src="general.js"></script> 
+
+</body>
+</html>
