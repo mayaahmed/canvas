@@ -1,5 +1,7 @@
 var canvas = document.getElementById('canvas');
 var context=canvas.getContext('2d');
+var string = "";
+  
 
 var     dragging = false,
     dragStartLocation,
@@ -220,4 +222,12 @@ function loadImageFileAsURL()
             fileReader.readAsDataURL(fileToLoad);
         }
     }
+}
+
+
+function showText(){
+  string = string+ "\n"+ document.getElementById("textbox").value;
+  context.font = "30px Arial";
+  context.fillText(string,250, 50);
+
 }
