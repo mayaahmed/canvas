@@ -3,8 +3,6 @@ canvas{
    
     border: 1px solid gray;
     background:#FFFFE0;
-    width: 800px; 
-    height: 800px;
     box-shadow: inset 2px 2px 1px rgba(0,0,0,0.2);
 }
 
