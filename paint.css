@@ -1,14 +1,14 @@
 canvas{
-    border: 1px solid gray;
+     border: 1px solid gray;
     background:#FFFFE0;
-    box-shadow: inset 2px 2px 1px rgba(0,0,0,0.2);
+   box-shadow: inset 2px 2px 1px rgba(0,0,0,0.2);
 }
 
 
 #canvasDiv{
-float:left;
-
+ float: left;
 }
+
 #controls{
 float: left;
   margin-left: 10px;
