@@ -1,7 +1,20 @@
 var canvas = document.getElementById('canvas');
 var context=canvas.getContext('2d');
-var string = "";
-  
+
+function initial(){
+
+  console.log("Ya");
+  if (localStorage.savedPaintCanvas){ 
+    var dataURL = JSON.parse(localStorage.savedPaintCanvas);
+    var img = new Image;
+    img.src = dataURL;
+    img.onload = function () {
+      context.drawImage(img, 0, 0);
+    };
+  }
+}
+
+initial();
 
 var     dragging = false,
     dragStartLocation,
@@ -15,6 +28,7 @@ function getCanvasCoordinates(event) {
 }
 
 function takeSnapshot() {
+
     snapshot = context.getImageData(0, 0, canvas.width, canvas.height);
 }
 
@@ -27,13 +41,27 @@ function drawLine(position) {
      context.moveTo(dragStartLocation.x, dragStartLocation.y);
     context.lineTo(position.x, position.y);
     context.stroke();
+    localStorage.savedPaintCanvas =JSON.stringify(canvas.toDataURL());
+
 }
+
+function drawQCurve(position) {
+   context.beginPath();
+     context.moveTo(dragStartLocation.x, dragStartLocation.y);
+     var cpx =  dragStartLocation.x;  var cpy=  position.x/2;
+     context.quadraticCurveTo(cpx, cpy, position.x, position.y);
+    context.stroke();
+    localStorage.savedPaintCanvas =JSON.stringify(canvas.toDataURL());
+}
+
+
 
 
 function drawFree(position) {
   if(dragging==true){
     context.lineTo(position.x, position.y);
     context.stroke();
+localStorage.savedPaintCanvas =JSON.stringify(canvas.toDataURL());
   takeSnapshot();
 }
 }
@@ -42,6 +70,8 @@ function drawCircle(position) {
     var radius = Math.sqrt(Math.pow((dragStartLocation.x - position.x), 2) + Math.pow((dragStartLocation.y - position.y), 2));
     context.beginPath();
     context.arc(dragStartLocation.x, dragStartLocation.y, radius, 0, 2 * Math.PI, false);
+localStorage.savedPaintCanvas =JSON.stringify(canvas.toDataURL());
+
 }
 
 function drawPolygon(position, sides, angle) {
@@ -58,6 +88,7 @@ function drawPolygon(position, sides, angle) {
     context.moveTo(coordinates[0].x, coordinates[0].y);
     for (index = 1; index < sides; index++) {
         context.lineTo(coordinates[index].x, coordinates[index].y);
+localStorage.savedPaintCanvas =JSON.stringify(canvas.toDataURL());
     }
 
     context.closePath();
@@ -86,15 +117,23 @@ function draw(position) {
         drawLine(position);
     }
 
+    if (shape === "qcurve") {
+        drawQCurve(position);
+    }
+
     if (shape === "polygon") {
         drawPolygon(position, polygonSides, polygonAngle * (Math.PI / 180));
     }
 
-    if (shape !== "line" && shape !== "free") {
+    if (shape !== "line" && shape !== "free" && shape!=="bcurve") {
         if (fillBox.checked) {
             context.fill();
+            localStorage.savedPaintCanvas =JSON.stringify(canvas.toDataURL());
+
         } else {
             context.stroke();
+            localStorage.savedPaintCanvas =JSON.stringify(canvas.toDataURL());
+
         }
     }
   
@@ -119,6 +158,7 @@ function drag(event) {
         restoreSnapshot();
         position = getCanvasCoordinates(event);
         draw(position);
+       
     }
 }
 
@@ -127,7 +167,8 @@ function dragStop(event) {
     dragging = false;
     restoreSnapshot();
     var position = getCanvasCoordinates(event);
-    draw(position); 
+    draw(position);
+
 }
 
 function changeLineWidth() {
@@ -149,6 +190,7 @@ function changeBackgroundColor() {
     context.save();
     context.fillStyle = document.getElementById("backgroundColor").value;
     context.fillRect(0, 0, canvas.width, canvas.height);
+localStorage.savedPaintCanvas =JSON.stringify(canvas.toDataURL());
     context.restore();
 }
 
@@ -217,17 +259,11 @@ function loadImageFileAsURL()
                 imageLoaded.src = fileLoadedEvent.target.result;
                 //   canvas.appendChild(imageLoaded);     
                 context.drawImage(imageLoaded,10,10,200,200);  
+localStorage.savedPaintCanvas =JSON.stringify(canvas.toDataURL());
                 
             };
             fileReader.readAsDataURL(fileToLoad);
         }
     }
-}
-
-
-function showText(){
-  string = string+ "\n"+ document.getElementById("textbox").value;
-  context.font = "30px Arial";
-  context.fillText(string,250, 50);
 
 }

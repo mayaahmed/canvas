@@ -13,11 +13,10 @@
         <link href="paint.css" rel="stylesheet">
        
 	</head>
-
-	<body>
+<body>
             <div id="topStuff">
           <header id="top_header">
-				<p>Paint</p>
+				<p>Canvas</p>
 			</header>
 			<nav id="top_menu">
 				<ul>
@@ -34,32 +33,32 @@
                 </ul>
 			</nav>
             </div>
-<div id="container"> 
+            
+            <div id="container"> 
 	
-    <div id="controls">
+              <div id="controls">
 
-      <p><input id="clearCanvas" class="listingButton" type="button" value="New"></p>
-      <p><input type="button" class="listingButton"  value="color" onclick="slideOpen(colorDiv)" ></p>
-      <div class="lightBorder" id="colorDiv">
-        <input type="button" class="closeButtonOptions" id="colorButton" value="&times"
-               onclick="slideClose(colorDiv, 'colorButton')">
-        <p><label>Fill: <input id="fillBox" type="checkbox" checked="checked"></label></p>
-        <p><label>Fill Color: <input id="fillColor" type="color" value="#3333FF"></label>
-        <p><label>Stroke Color: <input id="strokeColor" type="color"></label></p>  
-        <p><label>Fill Canvas: <input id="backgroundColor" type="color" value="#FFFFFF"></label></p>
-        
-    </div>
+                <p><input id="clearCanvas" class="listingButton" type="button" value="New"></p>
+                <p><input type="button" class="listingButton"  value="color" onclick="slideOpen(colorDiv)" ></p>
+                
+                <div class="lightBorder" id="colorDiv">
+                  <input type="button" class="closeButtonOptions" id="colorButton" value="&times"
+                         onclick="slideClose(colorDiv, 'colorButton')">
+                  <p><label>Fill: <input id="fillBox" type="checkbox" checked="checked"></label></p>
+                  <p><label>Fill Color: <input id="fillColor" type="color" value="#3333FF"></label>  
+                  <p><label>Fill Canvas: <input id="backgroundColor" type="color" value="#FFFFFF"></label></p>
+                  <p><label>Stroke Color: <input id="strokeColor" type="color"></label></p>
+                </div>
 
-     <p> <input type="button" class="listingButton"  value="Line Style" onclick="slideOpen(lineDiv)" ></p>
-      <div class="lightBorder" id="lineDiv"> 
-        <input type="button" class="closeButtonOptions" id="lineButton" value="&times"
-                 onclick="slideClose(lineDiv)"></p>
-        <p><label>Line Width: <input id="lineWidth" type="range" step="1" min="1" max="200" value="4"></label></p>
-       
-        <p><input type="radio" name="lineCap" value="round"  checked="checked">round</p>
- <p><input type="radio" name="lineCap" value="butt">Butt</p>
-        <p><input type="radio" name="lineCap" value="square">square</p>
-      </div>
+                <p> <input type="button" class="listingButton"  value="Line Style" onclick="slideOpen(lineDiv)" ></p>
+                <div class="lightBorder" id="lineDiv"> 
+                  <input type="button" class="closeButtonOptions" id="lineButton" value="&times"
+                         onclick="slideClose(lineDiv)"></p>
+                <p><label>Line Width: <input id="lineWidth" type="range" step="1" min="1" max="200" value="4"></label></p>
+                <p><input type="radio" name="lineCap" value="round"  checked="checked">round</p>
+                <p><input type="radio" name="lineCap" value="butt">Butt</p>
+                <p><input type="radio" name="lineCap" value="square">square</p>
+                 </div>
 
      <p> <input type="button" class="listingButton"  value="Shape" onclick="slideOpen(shapeDiv)" ></p>
       <div class="lightBorder" id="shapeDiv">
@@ -67,20 +66,12 @@
                  onclick="slideClose(shapeDiv)">
         <p> <input type="radio" name="shape"  value="free" checked="checked" >Free Drawing</p>
         <p><input type="radio" name="shape" value="line" >Line</p>
+        <p><input type="radio" name="shape" value="qcurve" >Quadratic Curve</p>
         <p><input type="radio" name="shape" value="circle">Circle</p>
         <p><input type="radio" name="shape" value="polygon">Polygon</p>
         <p><label>Polygon Sides: <input id="polygonSides" type="range" step="1" min="3" max="10"></label></p>
          <p><label>Polygon Angle: <input id="polygonAngle" type="range" step="22.5" min="0" max="90"></label></p>
       </div>
-
-<p> <input type="button" class="listingButton"  value="Text" onclick="slideOpen(textDiv)" ></p>
-<div class="lightBorder" id="textDiv">
-  <input type="button" class="closeButtonOptions" id="shapeButton" value="&times"
-                 onclick="slideClose(textDiv)">
-<p> <textarea id= "textbox" rows="2" cols="10" > Hello  </textarea> </p>
-<p> <input type="button" value="submit" onclick="showText()"> </P>
-
-</div>
 
 <p> <input type="button" class="listingButton"  value="Image" onclick="slideOpen(imageDiv)" ></p>
 <div class="lightBorder" id="imageDiv">
@@ -89,7 +80,9 @@
 <p> <input type="file" id= "inputFileToLoad" > </p>
 <p> <input type="button" id="buttonLoadFile" value ="Load Selected File"; onclick="loadImageFileAsURL()"> </p>
 </div>
-     <p> <input type="button" class="listingButton"  value="Composition" onclick="slideOpen(compositionControl)" ></p>
+     
+
+<p> <input type="button" class="listingButton"  value="Composition" onclick="slideOpen(compositionControl)" ></p>
 
      <div id="compositionControl" class="lightBorder">
        <input type="button" class="closeButtonOptions" id="compositionButton" value="&times"
@@ -108,13 +101,15 @@
         <p><input type="radio" name="composition" value="copy">copy</p>
         <p><input type="radio" name="composition" value="xor">xor</p>
     </div>
+
 </div>
 
 
-
+<div id="canvasDiv">
     <canvas id="canvas" width="600" height="600"> 
       Sorry Cannot display Canvas. Update Browser.
     </canvas>
+</div>
 
 
 </div>
