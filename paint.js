@@ -1,9 +1,18 @@
 var canvas = document.getElementById('canvas');
 var context=canvas.getContext('2d');
 
-function initial(){
 
-  console.log("Ya");
+// create backing canvas
+var backCanvas = document.createElement('canvas');
+backCanvas.width = canvas.width;
+backCanvas.height = canvas.height;
+var backCtx = backCanvas.getContext('2d');
+
+
+
+
+
+function initial(){
   if (localStorage.savedPaintCanvas){ 
     var dataURL = JSON.parse(localStorage.savedPaintCanvas);
     var img = new Image;
@@ -18,7 +27,7 @@ initial();
 
 var     dragging = false,
     dragStartLocation,
-  snapshot;
+  snapshot, savedSnapshot;
 
 function getCanvasCoordinates(event) {
     var x = event.clientX - canvas.getBoundingClientRect().left,
@@ -30,10 +39,18 @@ function getCanvasCoordinates(event) {
 function takeSnapshot() {
 
     snapshot = context.getImageData(0, 0, canvas.width, canvas.height);
+   
 }
 
+function deleteStep() {
+  console.log("time to draw");
+context.clearRect(0, 0, canvas.width, canvas.height);
+context.drawImage(backCanvas, 0,0);
+}
+
+
 function restoreSnapshot() {
-    context.putImageData(snapshot, 0, 0);
+   context.putImageData(snapshot, 0, 0);
 }
 
 function drawLine(position) {
@@ -42,6 +59,7 @@ function drawLine(position) {
     context.lineTo(position.x, position.y);
     context.stroke();
     localStorage.savedPaintCanvas =JSON.stringify(canvas.toDataURL());
+   
 
 }
 
@@ -52,17 +70,26 @@ function drawQCurve(position) {
      context.quadraticCurveTo(cpx, cpy, position.x, position.y);
     context.stroke();
     localStorage.savedPaintCanvas =JSON.stringify(canvas.toDataURL());
+    
 }
 
 
+
+function erase(position, esize) {
+  if(dragging==true){
+      context.clearRect(position.x, position.y, esize, esize);
+      localStorage.savedPaintCanvas =JSON.stringify(canvas.toDataURL());
+    takeSnapshot();
+}
+}
 
 
 function drawFree(position) {
   if(dragging==true){
     context.lineTo(position.x, position.y);
     context.stroke();
-localStorage.savedPaintCanvas =JSON.stringify(canvas.toDataURL());
-  takeSnapshot();
+    localStorage.savedPaintCanvas =JSON.stringify(canvas.toDataURL());
+    takeSnapshot();
 }
 }
 
@@ -100,12 +127,17 @@ function draw(position) {
         shape = document.querySelector('input[type="radio"][name="shape"]:checked').value,
         polygonSides = document.getElementById("polygonSides").value,
         polygonAngle = document.getElementById("polygonAngle").value,
-        lineCap = document.querySelector('input[type="radio"][name="lineCap"]:checked').value,
+      lineCap = document.querySelector('input[type="radio"][name="lineCap"]:checked').value,
+      eraseDim = document.getElementById("eraseArea").value,
         composition = document.querySelector('input[type="radio"][name="composition"]:checked').value;
-
+   
     context.lineCap = lineCap;
     context.globalCompositeOperation = composition;
     
+    if (shape === "eraser") {
+      erase(position, eraseDim);
+    }
+
     if (shape === "free") {
         drawFree(position);
     }
@@ -144,6 +176,7 @@ function dragStart(event) {
  
      dragging = true;
     dragStartLocation = getCanvasCoordinates(event);
+  backCtx.drawImage(canvas, 0,0);
     takeSnapshot();
     context.beginPath();
     context.moveTo(dragStartLocation.x, dragStartLocation.y);
@@ -155,6 +188,8 @@ function drag(event) {
  
     var position;
     if (dragging === true) {
+
+    
         restoreSnapshot();
         position = getCanvasCoordinates(event);
         draw(position);
@@ -190,12 +225,13 @@ function changeBackgroundColor() {
     context.save();
     context.fillStyle = document.getElementById("backgroundColor").value;
     context.fillRect(0, 0, canvas.width, canvas.height);
-localStorage.savedPaintCanvas =JSON.stringify(canvas.toDataURL());
+    localStorage.savedPaintCanvas =JSON.stringify(canvas.toDataURL());
     context.restore();
 }
 
 function eraseCanvas() {
     context.clearRect(0, 0, canvas.width, canvas.height);
+ backCtx.clearRect(0, 0, backCanvas.width, backCanvas.height);
 }
 
 function init() {
@@ -206,7 +242,7 @@ function init() {
         strokeColor = document.getElementById("strokeColor"),
         canvasColor = document.getElementById("backgroundColor"),
         clearCanvas = document.getElementById("clearCanvas");
-
+    deleteLastStep = document.getElementById("deleteLastStep");
     context.strokeStyle = strokeColor.value;
     context.fillStyle = fillColor.value;
     context.lineWidth = lineWidth.value;
@@ -220,7 +256,9 @@ function init() {
     strokeColor.addEventListener("input", changeStrokeStyle, false);
     canvasColor.addEventListener("input", changeBackgroundColor, false);
     clearCanvas.addEventListener("click", eraseCanvas, false);
+    deleteLastStep.addEventListener("click", deleteStep, false);
 }
+
 
 window.addEventListener('load', init, false);
 
